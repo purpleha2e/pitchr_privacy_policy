@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pitchr Support</title>
+  <style>
+    :root {
+      --page: #282a37;
+      --panel: #3a3f52;
+      --text: #f7f8fb;
+      --muted: #c8ceda;
+      --green: #83ca96;
+      --line: rgba(131, 202, 150, 0.35);
+      --shadow: rgba(0, 0, 0, 0.24);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--page);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.55;
+    }
+
+    main {
+      width: min(920px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 48px 0;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: 0 18px 50px var(--shadow);
+      overflow: hidden;
+    }
+
+    header {
+      padding: 36px 34px 28px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .logo {
+      display: block;
+      width: min(220px, 70vw);
+      height: auto;
+      margin: 0 0 18px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .updated {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    section {
+      padding: 26px 34px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    section:last-child {
+      border-bottom: 0;
+    }
+
+    h2 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      letter-spacing: 0;
+      color: var(--green);
+    }
+
+    p {
+      margin: 0 0 12px;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    li {
+      margin: 8px 0;
+    }
+
+    a {
+      color: var(--green);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    a:hover,
+    a:focus {
+      text-decoration: underline;
+    }
+
+    .contact-box {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .contact-row {
+      padding: 16px;
+      background: rgba(40, 42, 55, 0.72);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+    }
+
+    .label {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    footer {
+      padding: 22px 34px 30px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 640px) {
+      main {
+        width: min(100% - 20px, 920px);
+        padding: 18px 0;
+      }
+
+      header,
+      section,
+      footer {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .brand {
+        font-size: 30px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <article class="card">
+      <header>
+        <img class="logo" src="../assets/images/pitchr_logo.png" alt="Pitchr">
+        <h1>Support</h1>
+        <p class="updated">Last updated: 12 June 2026</p>
+      </header>
+
+      <section>
+        <h2>How to contact us</h2>
+        <p>
+          If you need help with Pitchr, please contact us by email. We aim to respond to support requests as soon as reasonably possible.
+        </p>
+        <div class="contact-box">
+          <div class="contact-row">
+            <span class="label">Support email</span>
+            <a href="mailto:support@pitchr.me">support@pitchr.me</a>
+          </div>
+          <div class="contact-row">
+            <span class="label">Privacy policy</span>
+            <a href="https://www.pitchr.me/privacy-policy/">https://www.pitchr.me/privacy-policy/</a>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Common support topics</h2>
+        <ul>
+          <li>Account access, login, verification, or password reset issues.</li>
+          <li>Questions about creating or updating your business profile.</li>
+          <li>Problems with matches, shortlists, connections, endorsements, messages, or notifications.</li>
+          <li>Subscription, purchase, restore purchase, or premium feature questions.</li>
+          <li>Requests to delete your account or ask questions about retained records.</li>
+          <li>Reporting inappropriate content, misuse, or suspicious activity.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Account deletion</h2>
+        <p>
+          You can request account deletion from within the Pitchr app by opening My App Settings and selecting the delete option in the Account section.
+        </p>
+        <p>
+          If you cannot access the app, email <a href="mailto:support@pitchr.me">support@pitchr.me</a> from the email address associated with your account and ask us to delete your Pitchr account.
+        </p>
+        <p>
+          We may retain limited records where required for security, legal, fraud-prevention, or dispute-resolution purposes.
+        </p>
+      </section>
+
+      <section>
+        <h2>Subscriptions and purchases</h2>
+        <p>
+          Pitchr subscriptions are processed through the app store used to purchase them. If your premium access is not showing correctly, use the restore purchase option in the app settings screen.
+        </p>
+        <p>
+          For refund requests, please use the refund process provided by Apple App Store or Google Play, depending on where the purchase was made.
+        </p>
+      </section>
+
+      <section>
+        <h2>Reporting safety or content concerns</h2>
+        <p>
+          To report inappropriate behaviour, suspicious activity, or content that may breach Pitchr rules, contact us at <a href="mailto:support@pitchr.me">support@pitchr.me</a>.
+        </p>
+        <p>
+          Please include your account email address, the username involved if relevant, and a short description of the issue.
+        </p>
+      </section>
+
+      <footer>
+        <p>Pitchr support: <a href="mailto:support@pitchr.me">support@pitchr.me</a></p>
+      </footer>
+    </article>
+  </main>
+</body>
+</html>
