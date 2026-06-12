@@ -246,7 +246,6 @@
     }
 
     .screenshot-card {
-      overflow: hidden;
       border-radius: 20px;
       border: 1px solid var(--white-line);
       background: rgba(58, 63, 82, 0.84);
@@ -256,14 +255,18 @@
     .screenshot-card img {
       display: block;
       width: 100%;
+      border-radius: 20px 20px 0 0;
       aspect-ratio: 9 / 19;
       object-fit: cover;
       object-position: top center;
     }
 
     .screenshot-caption {
-      padding: 18px;
-      border-top: 1px solid rgba(255, 255, 255, 0.09);
+      margin: 10px;
+      padding: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 14px;
+      background: rgba(34, 36, 49, 0.92);
     }
 
     .screenshot-caption h3 {
@@ -304,6 +307,10 @@
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 18px;
+    }
+
+    .feature-grid.four {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 
     .feature-card {
@@ -480,6 +487,7 @@
       }
 
       .feature-grid,
+      .feature-grid.four,
       .steps,
       .screenshot-grid {
         grid-template-columns: 1fr;
@@ -588,7 +596,7 @@
             People do not just need more contacts. They need better context, clearer intent and a quicker way to spot useful conversations.
           </p>
         </div>
-        <div class="feature-grid">
+        <div class="feature-grid four">
           <article class="feature-card">
             <div class="icon">1</div>
             <h3>Profiles with intent</h3>
@@ -603,6 +611,11 @@
             <div class="icon">3</div>
             <h3>Actionable next steps</h3>
             <p>Shortlist promising people, review richer profiles and move toward a connection when the fit looks right.</p>
+          </article>
+          <article class="feature-card">
+            <div class="icon">4</div>
+            <h3>Multiple profiles</h3>
+            <p>Manage different business profiles when a user has more than one goal, venture or type of opportunity in mind.</p>
           </article>
         </div>
       </section>
