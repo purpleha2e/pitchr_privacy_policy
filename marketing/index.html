@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pitchr - Business matching for founders, investors and partners</title>
+  <meta name="description" content="Pitchr helps founders, investors and business partners find more relevant opportunities through structured profiles, smarter matches and focused connections.">
+  <style>
+    :root {
+      --page: #282a37;
+      --panel: #3a3f52;
+      --panel-deep: #222431;
+      --text: #f7f8fb;
+      --muted: #c8ceda;
+      --soft: #eef2f0;
+      --green: #83ca96;
+      --green-deep: #5fb878;
+      --blue: #3493f5;
+      --line: rgba(131, 202, 150, 0.34);
+      --white-line: rgba(255, 255, 255, 0.10);
+      --shadow: rgba(0, 0, 0, 0.30);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 78% 8%, rgba(131, 202, 150, 0.14), transparent 30%),
+        radial-gradient(circle at 12% 26%, rgba(52, 147, 245, 0.12), transparent 28%),
+        var(--page);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 26px 0 44px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 10px 0 24px;
+    }
+
+    .logo {
+      display: block;
+      width: min(178px, 46vw);
+      height: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .nav-links a {
+      padding: 9px 11px;
+      border-radius: 999px;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text);
+    }
+
+    .hero {
+      position: relative;
+      min-height: calc(100vh - 96px);
+      display: grid;
+      align-items: center;
+      padding: 44px 0 54px;
+    }
+
+    .hero-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background:
+        linear-gradient(135deg, rgba(58, 63, 82, 0.98), rgba(34, 36, 49, 0.98)),
+        var(--panel);
+      box-shadow: 0 24px 70px var(--shadow);
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1.04fr) minmax(320px, 0.96fr);
+      gap: 38px;
+      align-items: center;
+      padding: 54px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      margin-bottom: 18px;
+      padding: 8px 12px;
+      border: 1px solid rgba(131, 202, 150, 0.36);
+      border-radius: 999px;
+      color: var(--green);
+      background: rgba(131, 202, 150, 0.08);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 18px rgba(131, 202, 150, 0.72);
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 700px;
+      font-size: clamp(42px, 6vw, 76px);
+      line-height: 0.98;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 610px;
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: clamp(18px, 2vw, 22px);
+      line-height: 1.45;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 13px 20px;
+      border-radius: 999px;
+      font-size: 16px;
+      font-weight: 800;
+      border: 1px solid transparent;
+    }
+
+    .button.primary {
+      background: var(--green);
+      color: #26302a;
+      box-shadow: 0 14px 34px rgba(131, 202, 150, 0.24);
+    }
+
+    .button.secondary {
+      color: var(--text);
+      border-color: rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    .hero-proof {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 34px;
+      max-width: 620px;
+    }
+
+    .proof-item {
+      padding: 15px;
+      border: 1px solid var(--white-line);
+      border-radius: 14px;
+      background: rgba(34, 36, 49, 0.72);
+    }
+
+    .proof-value {
+      display: block;
+      color: var(--green);
+      font-size: 24px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .proof-label {
+      display: block;
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .hero-shot {
+      justify-self: center;
+      width: min(360px, 100%);
+      padding: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 36px;
+      background: linear-gradient(145deg, #151722, #41475c);
+      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.38);
+    }
+
+    .hero-shot img {
+      display: block;
+      width: 100%;
+      border-radius: 26px;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.24);
+    }
+
+    .screenshot-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      align-items: start;
+      margin-top: 22px;
+    }
+
+    .screenshot-card {
+      overflow: hidden;
+      border-radius: 20px;
+      border: 1px solid var(--white-line);
+      background: rgba(58, 63, 82, 0.84);
+      box-shadow: 0 18px 44px rgba(0, 0, 0, 0.18);
+    }
+
+    .screenshot-card img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 9 / 19;
+      object-fit: cover;
+      object-position: top center;
+    }
+
+    .screenshot-caption {
+      padding: 18px;
+      border-top: 1px solid rgba(255, 255, 255, 0.09);
+    }
+
+    .screenshot-caption h3 {
+      margin: 0 0 6px;
+      font-size: 18px;
+      line-height: 1.2;
+    }
+
+    .screenshot-caption p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .section {
+      padding: 70px 0 0;
+    }
+
+    .section-head {
+      max-width: 720px;
+      margin-bottom: 24px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 46px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .section-head p {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .feature-card {
+      min-height: 230px;
+      padding: 24px;
+      border-radius: 18px;
+      background: rgba(58, 63, 82, 0.84);
+      border: 1px solid var(--white-line);
+      box-shadow: 0 18px 44px rgba(0, 0, 0, 0.16);
+    }
+
+    .icon {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      margin-bottom: 20px;
+      border-radius: 14px;
+      background: rgba(131, 202, 150, 0.15);
+      color: var(--green);
+      font-size: 22px;
+      font-weight: 900;
+    }
+
+    .feature-card h3,
+    .step h3 {
+      margin: 0 0 10px;
+      font-size: 21px;
+      line-height: 1.2;
+    }
+
+    .feature-card p,
+    .step p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      overflow: hidden;
+      background: rgba(58, 63, 82, 0.72);
+    }
+
+    .step {
+      padding: 28px;
+      border-right: 1px solid rgba(255, 255, 255, 0.09);
+    }
+
+    .step:last-child {
+      border-right: 0;
+    }
+
+    .step-number {
+      display: inline-grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      margin-bottom: 18px;
+      border-radius: 50%;
+      background: var(--green);
+      color: #26302a;
+      font-weight: 900;
+    }
+
+    .audience {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .audience-panel {
+      padding: 28px;
+      border-radius: 18px;
+      background: rgba(58, 63, 82, 0.86);
+      border: 1px solid var(--white-line);
+    }
+
+    .audience-panel.highlight {
+      border-color: var(--line);
+      background:
+        linear-gradient(135deg, rgba(131, 202, 150, 0.16), rgba(58, 63, 82, 0.90));
+    }
+
+    .audience-panel h3 {
+      margin: 0 0 12px;
+      font-size: 24px;
+    }
+
+    .audience-list {
+      display: grid;
+      gap: 11px;
+      margin: 18px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .audience-list li {
+      position: relative;
+      padding-left: 26px;
+      color: var(--muted);
+    }
+
+    .audience-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 9px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+    .cta {
+      margin-top: 70px;
+      padding: 36px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(135deg, rgba(131, 202, 150, 0.18), rgba(52, 147, 245, 0.10)),
+        rgba(58, 63, 82, 0.88);
+      box-shadow: 0 24px 70px var(--shadow);
+      text-align: center;
+    }
+
+    .cta h2 {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .cta p {
+      max-width: 640px;
+      margin: 16px auto 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .cta .actions {
+      justify-content: center;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      padding: 30px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    footer a {
+      color: var(--green);
+      font-weight: 800;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        min-height: auto;
+      }
+
+      .hero-inner,
+      .audience {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-shot {
+        width: min(340px, 100%);
+      }
+
+      .feature-grid,
+      .steps,
+      .screenshot-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .step {
+        border-right: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+      }
+
+      .step:last-child {
+        border-bottom: 0;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        width: min(100% - 20px, 1120px);
+        padding-top: 16px;
+      }
+
+      .nav {
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero-inner {
+        padding: 30px 20px;
+      }
+
+      .hero-proof {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding-top: 48px;
+      }
+
+      .feature-card,
+      .step,
+      .audience-panel,
+      .cta {
+        padding: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <nav class="nav" aria-label="Main navigation">
+      <a href="#top" aria-label="Pitchr home">
+        <img class="logo" src="../assets/images/pitchr_logo.png" alt="Pitchr">
+      </a>
+      <div class="nav-links">
+        <a href="#why">Why Pitchr</a>
+        <a href="#how">How it works</a>
+        <a href="#who">Who it is for</a>
+        <a href="mailto:support@pitchr.me">Contact</a>
+      </div>
+    </nav>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-card">
+          <div class="hero-inner">
+            <div>
+              <span class="eyebrow">Built for business discovery</span>
+              <h1 id="hero-title">Find sharper business matches.</h1>
+              <p class="lead">
+                Pitchr helps founders, investors and future business partners cut through vague networking and find people whose goals, profiles and appetite actually line up.
+              </p>
+              <div class="actions">
+                <a class="button primary" href="#how">See how it works</a>
+                <a class="button secondary" href="mailto:support@pitchr.me">Get in touch</a>
+              </div>
+              <div class="hero-proof" aria-label="Pitchr highlights">
+                <div class="proof-item">
+                  <span class="proof-value">Profile</span>
+                  <span class="proof-label">Structured business intent</span>
+                </div>
+                <div class="proof-item">
+                  <span class="proof-value">Match</span>
+                  <span class="proof-label">Smarter relevance scoring</span>
+                </div>
+                <div class="proof-item">
+                  <span class="proof-value">Connect</span>
+                  <span class="proof-label">Shortlists and introductions</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-shot" aria-label="Pitchr app profile preview">
+              <img src="einstein_profile.png" alt="Pitchr profile screen showing a user's profile, match details and business information">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="why" aria-labelledby="why-title">
+        <div class="section-head">
+          <h2 id="why-title">Networking is noisy. Pitchr is focused.</h2>
+          <p>
+            People do not just need more contacts. They need better context, clearer intent and a quicker way to spot useful conversations.
+          </p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <div class="icon">1</div>
+            <h3>Profiles with intent</h3>
+            <p>Capture what a user is looking for, what they offer and the shape of the opportunity they care about.</p>
+          </article>
+          <article class="feature-card">
+            <div class="icon">2</div>
+            <h3>Relevance over volume</h3>
+            <p>Matches are driven by business profile answers, tags and practical compatibility rather than a generic directory.</p>
+          </article>
+          <article class="feature-card">
+            <div class="icon">3</div>
+            <h3>Actionable next steps</h3>
+            <p>Shortlist promising people, review richer profiles and move toward a connection when the fit looks right.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="how" aria-labelledby="how-title">
+        <div class="section-head">
+          <h2 id="how-title">A simple flow for better business introductions.</h2>
+          <p>
+            Pitchr keeps the experience app-first and lightweight, while still collecting enough signal to make matching useful.
+          </p>
+        </div>
+        <div class="steps">
+          <article class="step">
+            <span class="step-number">1</span>
+            <h3>Build your business profile</h3>
+            <p>Answer focused questions about your business goal, preferred sector, investment needs, skills or partnership appetite.</p>
+          </article>
+          <article class="step">
+            <span class="step-number">2</span>
+            <h3>Review your matches</h3>
+            <p>See people ranked by compatibility, with profile detail that explains why a match may be worth your time.</p>
+          </article>
+          <article class="step">
+            <span class="step-number">3</span>
+            <h3>Shortlist and connect</h3>
+            <p>Keep track of the profiles that stand out, then move toward a connection when there is a strong enough reason.</p>
+          </article>
+        </div>
+        <div class="screenshot-grid" aria-label="Pitchr app screenshots">
+          <article class="screenshot-card">
+            <img src="business_profile.png" alt="Pitchr business profile screen with a set zero business profile choice">
+            <div class="screenshot-caption">
+              <h3>Set your intent</h3>
+              <p>Choose the business profile path that best describes what you are looking for.</p>
+            </div>
+          </article>
+          <article class="screenshot-card">
+            <img src="einstein_profile.png" alt="Pitchr user profile screen showing profile details and business answers">
+            <div class="screenshot-caption">
+              <h3>Review real profiles</h3>
+              <p>See richer profile detail before deciding whether a match is worth pursuing.</p>
+            </div>
+          </article>
+          <article class="screenshot-card">
+            <img src="connections.png" alt="Pitchr connections screen showing a user's business connections">
+            <div class="screenshot-caption">
+              <h3>Manage connections</h3>
+              <p>Keep track of the people you have connected with and continue the conversation.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="who" aria-labelledby="who-title">
+        <div class="section-head">
+          <h2 id="who-title">Made for the people building, backing and joining businesses.</h2>
+        </div>
+        <div class="audience">
+          <article class="audience-panel highlight">
+            <h3>For founders</h3>
+            <p>Find people who understand what stage you are at and what kind of help, capital or expertise you need next.</p>
+            <ul class="audience-list">
+              <li>Show your pitch, profile and business interests clearly.</li>
+              <li>Discover investors, advisors and possible partners.</li>
+              <li>Focus on fit before starting the conversation.</li>
+            </ul>
+          </article>
+          <article class="audience-panel">
+            <h3>For investors and partners</h3>
+            <p>Use profile signals to find opportunities that match your appetite, preferred involvement and business areas.</p>
+            <ul class="audience-list">
+              <li>Browse more relevant founder and business profiles.</li>
+              <li>Use tags and structured answers to spot alignment.</li>
+              <li>Build a shortlist around your actual investment or partnership criteria.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="cta" aria-labelledby="cta-title">
+        <h2 id="cta-title">Pitchr is built for focused business matching.</h2>
+        <p>
+          A cleaner way to discover founders, investors and business partners who are looking for the same kind of opportunity.
+        </p>
+        <div class="actions">
+          <a class="button primary" href="mailto:support@pitchr.me">Contact Pitchr</a>
+          <a class="button secondary" href="https://www.pitchr.me/privacy-policy/">Privacy policy</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>Pitchr</span>
+      <span><a href="mailto:support@pitchr.me">support@pitchr.me</a> · <a href="https://www.pitchr.me/support/">Support</a></span>
+    </footer>
+  </div>
+</body>
+</html>
