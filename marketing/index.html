@@ -303,6 +303,31 @@
       font-size: 18px;
     }
 
+    .origin-note {
+      max-width: 880px;
+      margin: 0 0 24px;
+      padding: 22px 24px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background:
+        linear-gradient(135deg, rgba(131, 202, 150, 0.14), rgba(52, 147, 245, 0.08)),
+        rgba(34, 36, 49, 0.82);
+      box-shadow: 0 18px 44px rgba(0, 0, 0, 0.16);
+    }
+
+    .origin-note h3 {
+      margin: 0 0 8px;
+      color: var(--green);
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    .origin-note p {
+      margin: 0;
+      color: var(--soft);
+      font-size: 18px;
+    }
+
     .feature-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -532,6 +557,7 @@
       .feature-card,
       .step,
       .audience-panel,
+      .origin-note,
       .cta {
         padding: 22px;
       }
@@ -596,6 +622,12 @@
             People do not just need more contacts. They need better context, clearer intent and a quicker way to spot useful conversations.
           </p>
         </div>
+        <article class="origin-note" aria-label="Why Pitchr exists">
+          <h3>Why Pitchr?</h3>
+          <p>
+            Dragons' Den showed how powerful the right business connection can be. Pitchr brings that idea to everyone: structured profiles, smarter matching and direct founder-to-investor discovery.
+          </p>
+        </article>
         <div class="feature-grid four">
           <article class="feature-card">
             <div class="icon">1</div>
