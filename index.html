@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pitchr | Business matching for founders, investors and partners</title>
+  <meta name="description" content="Pitchr helps founders, investors, buyers and business partners find relevant opportunities through structured business profiles, matching and focused connections.">
+  <style>
+    :root {
+      --page: #282a37;
+      --band: #313546;
+      --ink: #f8f9fc;
+      --muted: #c8ceda;
+      --green: #83ca96;
+      --blue: #3493f5;
+      --line: rgba(255,255,255,0.12);
+      --green-line: rgba(131,202,150,0.38);
+      --shadow: rgba(0,0,0,0.32);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--page);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    .wrap {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand img {
+      width: min(190px, 52vw);
+      height: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .nav-links a {
+      padding: 8px 10px;
+      border-radius: 999px;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus {
+      color: var(--ink);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .hero {
+      min-height: calc(100vh - 76px);
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.95fr);
+      align-items: center;
+      gap: 56px;
+      padding: 30px 0 68px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin: 0 0 18px;
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 720px;
+      font-size: clamp(42px, 6.1vw, 78px);
+      line-height: 0.98;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 640px;
+      margin: 24px 0 0;
+      color: var(--muted);
+      font-size: clamp(18px, 2vw, 22px);
+      line-height: 1.45;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 32px;
+    }
+
+    .button {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 20px;
+      border-radius: 999px;
+      font-size: 16px;
+      font-weight: 800;
+      border: 1px solid transparent;
+    }
+
+    .button.primary {
+      background: var(--green);
+      color: #1f2b24;
+      box-shadow: 0 14px 30px rgba(131,202,150,0.22);
+    }
+
+    .button.secondary {
+      background: rgba(255,255,255,0.07);
+      border-color: var(--line);
+      color: var(--ink);
+    }
+
+    .hero-phone {
+      width: min(330px, 76vw);
+      margin: 0 auto;
+      overflow: hidden;
+      border: 10px solid #171a24;
+      border-radius: 34px;
+      background: #171a24;
+      box-shadow: 0 30px 70px var(--shadow);
+      transform: rotate(2deg);
+    }
+
+    .hero-phone img {
+      border-radius: 22px;
+    }
+
+    .scroll-cue {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .scroll-cue span {
+      width: 22px;
+      height: 34px;
+      border: 2px solid rgba(255,255,255,0.34);
+      border-radius: 999px;
+      position: relative;
+    }
+
+    .scroll-cue span::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 7px;
+      width: 4px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--green);
+      transform: translateX(-50%);
+      animation: wheel 1.5s ease-in-out infinite;
+    }
+
+    @keyframes wheel {
+      0%, 100% { opacity: 0.3; transform: translate(-50%, 0); }
+      45% { opacity: 1; transform: translate(-50%, 10px); }
+    }
+
+    .story {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: var(--band);
+    }
+
+    .story-layout {
+      display: grid;
+      grid-template-columns: minmax(280px, 0.82fr) minmax(0, 1.18fr);
+      gap: 64px;
+      align-items: start;
+    }
+
+    .sticky-visual {
+      position: sticky;
+      top: 28px;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 44px 0;
+    }
+
+    .device {
+      width: min(320px, 78vw);
+      overflow: hidden;
+      border: 10px solid #171a24;
+      border-radius: 34px;
+      background: #171a24;
+      box-shadow: 0 28px 72px var(--shadow);
+    }
+
+    .device img {
+      width: 100%;
+      border-radius: 22px;
+      opacity: 1;
+      transform: scale(1);
+      transition: opacity 260ms ease, transform 260ms ease;
+    }
+
+    .device img.is-changing {
+      opacity: 0.2;
+      transform: scale(0.985);
+    }
+
+    .progress {
+      width: min(320px, 78vw);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .progress span {
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.18);
+      transition: background 220ms ease;
+    }
+
+    .progress span.active {
+      background: var(--green);
+    }
+
+    .steps {
+      padding: 12vh 0;
+    }
+
+    .step {
+      min-height: 78vh;
+      display: grid;
+      align-content: center;
+      padding: 42px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .step:last-child {
+      border-bottom: 0;
+    }
+
+    .step-number {
+      color: var(--green);
+      font-size: 14px;
+      font-weight: 900;
+      margin-bottom: 14px;
+    }
+
+    .step h2 {
+      margin: 0;
+      max-width: 620px;
+      font-size: clamp(32px, 4.4vw, 58px);
+      line-height: 1.03;
+      letter-spacing: 0;
+    }
+
+    .step p {
+      max-width: 610px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 19px;
+    }
+
+    .step-list {
+      display: grid;
+      gap: 12px;
+      max-width: 610px;
+      margin-top: 24px;
+    }
+
+    .step-list div {
+      padding: 14px 16px;
+      border-left: 4px solid var(--green);
+      border-radius: 6px;
+      background: rgba(255,255,255,0.06);
+      color: var(--muted);
+    }
+
+    .audience {
+      padding: 76px 0;
+    }
+
+    .audience h2,
+    .cta h2 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 32px;
+    }
+
+    .card {
+      min-height: 210px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.045);
+    }
+
+    .card h3 {
+      margin: 0;
+      color: var(--green);
+      font-size: 20px;
+    }
+
+    .card p {
+      margin: 12px 0 0;
+      color: var(--muted);
+    }
+
+    .cta {
+      padding: 70px 0;
+      text-align: center;
+      background: var(--band);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .cta p {
+      max-width: 640px;
+      margin: 16px auto 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    footer {
+      padding: 32px 0 44px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      font-size: 14px;
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      font-weight: 700;
+    }
+
+    @media (max-width: 920px) {
+      .hero,
+      .story-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: 0;
+      }
+
+      .sticky-visual {
+        position: relative;
+        top: auto;
+        min-height: auto;
+        padding: 44px 0 0;
+      }
+
+      .steps {
+        padding-top: 0;
+      }
+
+      .step {
+        min-height: auto;
+        padding: 54px 0;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 18px 0 0;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: space-between;
+        gap: 6px;
+      }
+
+      .nav-links a {
+        padding-left: 0;
+      }
+
+      .actions .button {
+        width: 100%;
+      }
+
+      .hero {
+        padding-top: 34px;
+      }
+
+      .audience {
+        padding: 56px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap nav">
+    <a class="brand" href="/" aria-label="Pitchr home">
+      <img src="pitchr_logo.png" alt="Pitchr">
+    </a>
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a href="#walkthrough">How it works</a>
+      <a href="#who">Who it is for</a>
+      <a href="pitchr-support.html">Support</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="wrap hero">
+      <div>
+        <p class="eyebrow">Business opportunity matching</p>
+        <h1>Find the right investors, buyers and business partners.</h1>
+        <p class="lead">Pitchr helps founders, investors, acquirers and advisers make focused business connections using structured profiles, tags and daily matches.</p>
+        <div class="actions">
+          <a class="button primary" href="#download">Get Pitchr</a>
+          <a class="button secondary" href="#walkthrough">See how it works</a>
+        </div>
+        <div class="scroll-cue"><span aria-hidden="true"></span>Scroll to follow the Pitchr flow</div>
+      </div>
+      <div class="hero-phone" aria-label="Pitchr daily matches preview">
+        <img src="todays_matches.png" alt="Pitchr daily matches screen">
+      </div>
+    </section>
+
+    <section id="walkthrough" class="story">
+      <div class="wrap story-layout">
+        <aside class="sticky-visual" aria-label="Pitchr app walkthrough">
+          <div>
+            <div class="device">
+              <img id="story-image" src="business_profile.png" alt="Pitchr business profile screen">
+            </div>
+            <div class="progress" aria-hidden="true">
+              <span class="active"></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+        </aside>
+
+        <div class="steps">
+          <article class="step" data-image="business_profile.png" data-alt="Pitchr business profile screen">
+            <div class="step-number">01 / Profile</div>
+            <h2>Start with what you are actually looking for.</h2>
+            <p>Pitchr asks structured business questions so founders, investors, buyers and partners can describe the opportunity with enough context to make matching useful.</p>
+            <div class="step-list">
+              <div>Choose your next move: raise investment, invest, acquire, partner, advise or build your network.</div>
+              <div>Add sector, funding range, stage, involvement and other criteria where relevant.</div>
+            </div>
+          </article>
+
+          <article class="step" data-image="einstein_profile.png" data-alt="Pitchr profile card screen">
+            <div class="step-number">02 / Pitch</div>
+            <h2>Show enough to create interest without giving everything away.</h2>
+            <p>Profiles combine the user's pitch, tags, occupation, business answers and activity signals so people can quickly decide whether a conversation is worth starting.</p>
+            <div class="step-list">
+              <div>Founders can explain what they are building and why it matters.</div>
+              <div>Investors and partners can show the type of opportunities they want to see.</div>
+            </div>
+          </article>
+
+          <article class="step" data-image="todays_matches.png" data-alt="Pitchr daily matches screen">
+            <div class="step-number">03 / Matches</div>
+            <h2>Review a focused set of daily opportunities.</h2>
+            <p>Pitchr brings relevant people into one daily view, with scores and profile details designed to reduce blind browsing and low-context outreach.</p>
+            <div class="step-list">
+              <div>Shortlist profiles that look interesting.</div>
+              <div>Hide or pass on profiles that are not relevant.</div>
+            </div>
+          </article>
+
+          <article class="step" data-image="connections.png" data-alt="Pitchr connections screen">
+            <div class="step-number">04 / Connect</div>
+            <h2>Move forward only when there is mutual interest.</h2>
+            <p>Connection requests keep the first step lightweight. Once both sides are interested, Pitchr opens the door to a more direct business conversation.</p>
+            <div class="step-list">
+              <div>Send a request when the fit looks right.</div>
+              <div>Use messages to explore the opportunity in more detail.</div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="who" class="audience">
+      <div class="wrap">
+        <h2>For the people around a business opportunity.</h2>
+        <div class="cards">
+          <article class="card">
+            <h3>Founders and owners</h3>
+            <p>Find investors, buyers, advisers, partners and useful business conversations.</p>
+          </article>
+          <article class="card">
+            <h3>Investors and buyers</h3>
+            <p>Look for relevant companies by sector, amount, stage, location and intent.</p>
+          </article>
+          <article class="card">
+            <h3>Partners and advisers</h3>
+            <p>Connect around business guidance, networks, operational experience and collaboration.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="download" class="cta">
+      <div class="wrap">
+        <h2>Start with your next move.</h2>
+        <p>Pitchr is available as a mobile app. Create a profile, add your pitch and start reviewing business matches.</p>
+        <div class="actions" style="justify-content:center;">
+          <a class="button primary" href="mailto:support@pitchr.me?subject=Pitchr%20app%20access">Request app access</a>
+          <a class="button secondary" href="pitchr-support.html">Contact support</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-row">
+      <div>Copyright 2026 Pitchr. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="pitchr-support.html">Support</a>
+        <a href="mailto:support@pitchr.me">support@pitchr.me</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const image = document.getElementById('story-image');
+    const steps = Array.from(document.querySelectorAll('.step'));
+    const progress = Array.from(document.querySelectorAll('.progress span'));
+    let activeIndex = 0;
+
+    function setActive(index) {
+      if (index === activeIndex || !steps[index]) return;
+      activeIndex = index;
+      const next = steps[index];
+      image.classList.add('is-changing');
+      window.setTimeout(() => {
+        image.src = next.dataset.image;
+        image.alt = next.dataset.alt;
+        image.classList.remove('is-changing');
+      }, 140);
+      progress.forEach((bar, i) => bar.classList.toggle('active', i <= index));
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter(entry => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (!visible) return;
+      setActive(steps.indexOf(visible.target));
+    }, { threshold: [0.35, 0.55, 0.75] });
+
+    steps.forEach(step => observer.observe(step));
+  </script>
+</body>
+</html>
