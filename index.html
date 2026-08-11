@@ -229,13 +229,6 @@
       width: 100%;
       border-radius: 22px;
       opacity: 1;
-      transform: scale(1);
-      transition: opacity 260ms ease, transform 260ms ease;
-    }
-
-    .device img.is-changing {
-      opacity: 0.2;
-      transform: scale(0.985);
     }
 
     .progress {
@@ -449,12 +442,12 @@
 <body>
   <header class="wrap nav">
     <a class="brand" href="/" aria-label="Pitchr home">
-      <img src="pitchr_logo.png" alt="Pitchr">
+      <img src="/pitchr_logo.png" alt="Pitchr">
     </a>
     <nav class="nav-links" aria-label="Primary navigation">
       <a href="#walkthrough">How it works</a>
       <a href="#who">Who it is for</a>
-      <a href="pitchr-support.html">Support</a>
+      <a href="/support">Support</a>
     </nav>
   </header>
 
@@ -471,7 +464,7 @@
         <div class="scroll-cue"><span aria-hidden="true"></span>Scroll to follow the Pitchr flow</div>
       </div>
       <div class="hero-phone" aria-label="Pitchr daily matches preview">
-        <img src="todays_matches.png" alt="Pitchr daily matches screen">
+        <img src="/homepage-matches.png" alt="Pitchr daily matches screen">
       </div>
     </section>
 
@@ -480,7 +473,7 @@
         <aside class="sticky-visual" aria-label="Pitchr app walkthrough">
           <div>
             <div class="device">
-              <img id="story-image" src="business_profile.png" alt="Pitchr business profile screen">
+              <img id="story-image" src="/homepage-profile.png" alt="Pitchr business profile screen">
             </div>
             <div class="progress" aria-hidden="true">
               <span class="active"></span>
@@ -492,7 +485,7 @@
         </aside>
 
         <div class="steps">
-          <article class="step" data-image="business_profile.png" data-alt="Pitchr business profile screen">
+          <article class="step" data-image="/homepage-profile.png" data-alt="Pitchr business profile screen">
             <div class="step-number">01 / Profile</div>
             <h2>Start with what you are actually looking for.</h2>
             <p>Pitchr asks structured business questions so founders, investors, buyers and partners can describe the opportunity with enough context to make matching useful.</p>
@@ -502,7 +495,7 @@
             </div>
           </article>
 
-          <article class="step" data-image="einstein_profile.png" data-alt="Pitchr profile card screen">
+          <article class="step" data-image="/homepage-card.png" data-alt="Pitchr profile card screen">
             <div class="step-number">02 / Pitch</div>
             <h2>Show enough to create interest without giving everything away.</h2>
             <p>Profiles combine the user's pitch, tags, occupation, business answers and activity signals so people can quickly decide whether a conversation is worth starting.</p>
@@ -512,7 +505,7 @@
             </div>
           </article>
 
-          <article class="step" data-image="todays_matches.png" data-alt="Pitchr daily matches screen">
+          <article class="step" data-image="/homepage-matches.png" data-alt="Pitchr daily matches screen">
             <div class="step-number">03 / Matches</div>
             <h2>Review a focused set of daily opportunities.</h2>
             <p>Pitchr brings relevant people into one daily view, with scores and profile details designed to reduce blind browsing and low-context outreach.</p>
@@ -522,7 +515,7 @@
             </div>
           </article>
 
-          <article class="step" data-image="connections.png" data-alt="Pitchr connections screen">
+          <article class="step" data-image="/homepage-connections.png" data-alt="Pitchr connections screen">
             <div class="step-number">04 / Connect</div>
             <h2>Move forward only when there is mutual interest.</h2>
             <p>Connection requests keep the first step lightweight. Once both sides are interested, Pitchr opens the door to a more direct business conversation.</p>
@@ -561,7 +554,7 @@
         <p>Pitchr is available as a mobile app. Create a profile, add your pitch and start reviewing business matches.</p>
         <div class="actions" style="justify-content:center;">
           <a class="button primary" href="mailto:support@pitchr.me?subject=Pitchr%20app%20access">Request app access</a>
-          <a class="button secondary" href="pitchr-support.html">Contact support</a>
+          <a class="button secondary" href="/support">Contact support</a>
         </div>
       </div>
     </section>
@@ -571,8 +564,8 @@
     <div class="wrap footer-row">
       <div>Copyright 2026 Pitchr. All rights reserved.</div>
       <div class="footer-links">
-        <a href="privacy-policy.html">Privacy Policy</a>
-        <a href="pitchr-support.html">Support</a>
+        <a href="/privacy-policy">Privacy Policy</a>
+        <a href="/support">Support</a>
         <a href="mailto:support@pitchr.me">support@pitchr.me</a>
       </div>
     </div>
@@ -583,29 +576,46 @@
     const steps = Array.from(document.querySelectorAll('.step'));
     const progress = Array.from(document.querySelectorAll('.progress span'));
     let activeIndex = 0;
+    let ticking = false;
+
+    steps.forEach((step) => {
+      const preload = new Image();
+      preload.src = step.dataset.image;
+    });
 
     function setActive(index) {
       if (index === activeIndex || !steps[index]) return;
       activeIndex = index;
       const next = steps[index];
-      image.classList.add('is-changing');
-      window.setTimeout(() => {
-        image.src = next.dataset.image;
-        image.alt = next.dataset.alt;
-        image.classList.remove('is-changing');
-      }, 140);
+      image.src = next.dataset.image;
+      image.alt = next.dataset.alt;
       progress.forEach((bar, i) => bar.classList.toggle('active', i <= index));
     }
 
-    const observer = new IntersectionObserver((entries) => {
-      const visible = entries
-        .filter(entry => entry.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-      if (!visible) return;
-      setActive(steps.indexOf(visible.target));
-    }, { threshold: [0.35, 0.55, 0.75] });
+    function updateActiveStep() {
+      ticking = false;
+      const trigger = window.innerHeight * 0.52;
+      let nextIndex = 0;
 
-    steps.forEach(step => observer.observe(step));
+      steps.forEach((step, index) => {
+        const rect = step.getBoundingClientRect();
+        if (rect.top <= trigger) {
+          nextIndex = index;
+        }
+      });
+
+      setActive(nextIndex);
+    }
+
+    function requestUpdate() {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(updateActiveStep);
+    }
+
+    window.addEventListener('scroll', requestUpdate, { passive: true });
+    window.addEventListener('resize', requestUpdate);
+    updateActiveStep();
   </script>
 </body>
 </html>
