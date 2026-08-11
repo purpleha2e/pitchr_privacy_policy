@@ -231,6 +231,7 @@
       width: 100%;
       border-radius: 22px;
       opacity: 1;
+      transition: opacity 260ms ease;
     }
 
     .progress {
@@ -400,18 +401,18 @@
       }
 
       .sticky-visual .device {
-        width: min(230px, 56vw);
-        border-width: 8px;
-        border-radius: 28px;
+        width: min(190px, 46vw);
+        border-width: 7px;
+        border-radius: 24px;
       }
 
       .sticky-visual .device img {
-        border-radius: 18px;
+        border-radius: 15px;
       }
 
       .progress {
-        width: min(230px, 56vw);
-        margin-top: 10px;
+        width: min(190px, 46vw);
+        margin-top: 8px;
       }
 
       .steps {
@@ -596,6 +597,7 @@
     const progress = Array.from(document.querySelectorAll('.progress span'));
     let activeIndex = 0;
     let ticking = false;
+    let imageSwapTimer = null;
 
     steps.forEach((step) => {
       const preload = new Image();
@@ -606,8 +608,20 @@
       if (index === activeIndex || !steps[index]) return;
       activeIndex = index;
       const next = steps[index];
-      image.src = next.dataset.image;
-      image.alt = next.dataset.alt;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        image.src = next.dataset.image;
+        image.alt = next.dataset.alt;
+      } else {
+        window.clearTimeout(imageSwapTimer);
+        image.style.opacity = '0';
+        imageSwapTimer = window.setTimeout(() => {
+          image.src = next.dataset.image;
+          image.alt = next.dataset.alt;
+          window.requestAnimationFrame(() => {
+            image.style.opacity = '1';
+          });
+        }, 180);
+      }
       progress.forEach((bar, i) => bar.classList.toggle('active', i <= index));
     }
 
