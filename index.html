@@ -390,10 +390,28 @@
       }
 
       .sticky-visual {
-        position: relative;
-        top: auto;
+        position: sticky;
+        top: 0;
+        z-index: 5;
         min-height: auto;
-        padding: 44px 0 0;
+        padding: 18px 0 14px;
+        background: var(--band);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .sticky-visual .device {
+        width: min(230px, 56vw);
+        border-width: 8px;
+        border-radius: 28px;
+      }
+
+      .sticky-visual .device img {
+        border-radius: 18px;
+      }
+
+      .progress {
+        width: min(230px, 56vw);
+        margin-top: 10px;
       }
 
       .steps {
